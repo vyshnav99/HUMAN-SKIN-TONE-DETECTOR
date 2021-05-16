@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="eng" dir="ltr">
+
+<html>
+
+    <head>
+
+    <meta charset="utf-8">
+
+    <title>preview image before upload</title>
+
+<!--  connect css file  -->
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="http://kit.fontawesome.com/a076d05399.js"></script>
+
+    </head>
+
+    <body style="background-color: rgba(196, 211, 255, 0.979);">
+
+        <div class ="container">
+
+            <div class="wrapper">
+
+                <div class="image">
+
+                    <img src ="" alt=" ">
+
+                </div>
+
+                <div class="content">
+
+                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+
+                    <div class="text">no file chosen</div>
+
+                </div>
+
+                <div id="cancel-btn"><i class="fas fa-times"></i></div>
+
+                <div class="file-name">file name</i></div>
+
+            </div>
+
+            <input id="default-btn" type="file" hidden>
+
+            <button onclick="defaultBtnActive()" id="custom-btn">Choose a file</button>
+
+        </div>
+        <form enctype="multipart/form-data" method="POST" action="Skin_tone_classification.py">
+            <input id="txt" type="text" name="pname" placeholder="HUMAN SKIN TONE"><br><br>
+        <input id="txt" type="file" name="filename" placeholder="image"><br><br>
+        <textarea cols="100"rows="20" name="des"></textarea><br><br>
+        <input id="txt" type="submit" name="sub" value="show skin tone">
+         </form>
+        <script>
+
+            const wrapper = document.querySelector(".wrapper");
+
+            const fileName = document.querySelector(".file-name");
+
+            const cancelBtn = document.querySelector("#cancel-btn");
+
+            const defaultBtn = document.querySelector("#default-btn");
+
+            const customBtn = document.querySelector("#custom-btn");
+
+            const img = document.querySelector("img");
+
+            let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_]+$/;
+
+            function defaultBtnActive(){
+
+                defaultBtn.click();
+
+            }
+
+            defaultBtn.addEventListener("change",function(){
+
+            const file = this.files[0];
+
+            if(file){
+
+                const reader = new FileReader();
+
+                reader.onload = function(){
+
+                const result = reader.result;
+
+                img.src = result;
+
+                wrapper.classList.add("active");
+
+            }
+
+            cancelBtn.addEventListener("click",function(){
+
+                img.src = "";
+
+                wrapper.classList.remove("active");
+
+            });
+
+            reader.readAsDataURL(file);
+
+            }
+
+            if(this.value){
+
+                let valueStore = this.value.match(regExp);
+
+                fileName.textContent = valueStore;
+
+            }
+
+            });
+
+        </script>
+
+    </body>
+
+</html>
